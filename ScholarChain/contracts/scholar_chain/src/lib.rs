@@ -11,9 +11,9 @@ pub struct ScholarChain;
 impl ScholarChain {
     /// Mint reward tokens to a student
     /// Öğrenciye ödül tokenları ekler ve toplam dağıtılanı günceller
-    pub fn mint_reward(env: Env, student: Address, amount: u32) -> u32 {
-        // Auth check - caller must be authorized
-        student.require_auth();
+    pub fn mint_reward(env: Env, teacher: Address, student: Address, amount: u32) -> u32 {
+        // Auth check - teacher must be authorized to mint tokens
+        teacher.require_auth();
 
         // Get current balance (default to 0 if not exists)
         let mut balances: Map<Address, u32> = env

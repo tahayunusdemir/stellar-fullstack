@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import {
   isConnected,
   requestAccess,
+  getPublicKey,
 } from '@stellar/freighter-api'
 import { Button } from './Button'
 import { Card, CardText } from './Card'
@@ -91,6 +92,19 @@ export default function WalletConnect({
     try {
       const installed = await isConnected();
       setIsFreighterInstalled(installed);
+      
+      // If Freighter is installed, check if already connected
+      if (installed) {
+        try {
+          const publicKey = await getPublicKey();
+          if (publicKey) {
+            setPublicKey(publicKey);
+            onConnect(publicKey);
+          }
+        } catch (err) {
+          // User hasn't connected yet, which is fine
+        }
+      }
     } catch (err) {
       console.error('Error checking Freighter:', err);
       setIsFreighterInstalled(false);
@@ -104,7 +118,18 @@ export default function WalletConnect({
     setError('');
 
     try {
-      const { address, error: accessError } = await requestAccess();
+      const response = await requestAccess();
+
+      // Handle different response formats
+      let address = '';
+      let accessError = '';
+
+      if (typeof response === 'string') {
+        address = response;
+      } else if (response && typeof response === 'object') {
+        address = response.address || response.publicKey || '';
+        accessError = response.error || '';
+      }
 
       if (accessError) {
         setError(accessError);
@@ -115,6 +140,8 @@ export default function WalletConnect({
       if (address) {
         setPublicKey(address);
         onConnect(address);
+      } else {
+        setError('Cüzdan adresine erişilemedi');
       }
     } catch (err: any) {
       setError(err?.message || 'Cüzdan bağlantısı başarısız oldu');
