@@ -1,8 +1,6 @@
 # ScholarChain 🎓
 
 <div align="center">
-  <img src="stellar-fullstack/ScholarChain/frontend/public/stellar-logo.svg" alt="Stellar Logo" height="60" />
-  
   ### Blockchain-based Student Reward Platform
   
   [![Powered by Stellar](https://img.shields.io/badge/Powered%20by-Stellar-000000?style=flat&logo=stellar)](https://stellar.org)
