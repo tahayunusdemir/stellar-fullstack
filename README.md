@@ -1,7 +1,7 @@
 # ScholarChain 🎓
 
 <div align="center">
-  ### Blockchain-based Student Reward Platform
+  Blockchain-based Student Reward Platform
   
   [![Powered by Stellar](https://img.shields.io/badge/Powered%20by-Stellar-000000?style=flat&logo=stellar)](https://stellar.org)
   [![Built with Soroban](https://img.shields.io/badge/Built%20with-Soroban-7B42BC?style=flat)](https://soroban.stellar.org)
@@ -282,7 +282,6 @@ This project is licensed under the MIT License.
 ---
 
 <div align="center">
-  <p>Built with ❤️ using</p>
-  <img src="stellar-fullstack/ScholarChain/frontend/public/stellar-logo.svg" alt="Stellar" height="50" />
+  <p>Built with ❤️ using </p>
   <p><strong>Stellar & Soroban</strong></p>
 </div>
