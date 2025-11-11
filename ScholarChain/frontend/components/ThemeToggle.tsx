@@ -1,6 +1,6 @@
 'use client'
 
-import { useTheme } from '@/lib/ThemeProvider'
+import { useTheme } from '@/styles/ThemeProvider'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
@@ -11,8 +11,8 @@ const ToggleButton = styled(motion.button)`
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.surface};
-  border: 1px solid ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => theme.colors.surface.toString()};
+  border: 1px solid ${({ theme }) => theme.colors.border.toString()};
   display: flex;
   align-items: center;
   justify-content: center;

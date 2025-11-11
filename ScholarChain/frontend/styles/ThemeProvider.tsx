@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
-import { lightTheme, darkTheme } from '@/styles/theme'
+import { lightTheme, darkTheme } from './theme'
 
 type ThemeMode = 'light' | 'dark'
 
@@ -22,26 +22,41 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<ThemeMode>('light')
   const [mounted, setMounted] = useState(false)
 
-  // Initialize theme from localStorage and system preference
   useEffect(() => {
     setMounted(true)
     const savedTheme = localStorage.getItem('scholarchain-theme') as ThemeMode
     
-    if (savedTheme) {
+    if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
       setTheme(savedTheme)
     } else {
-      // Check system preference
       const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-      setTheme(isDark ? 'dark' : 'light')
+      const preferredTheme = isDark ? 'dark' : 'light'
+      setTheme(preferredTheme)
+      localStorage.setItem('scholarchain-theme', preferredTheme)
     }
+    
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const handleChange = (e: MediaQueryListEvent) => {
+      const saved = localStorage.getItem('scholarchain-theme')
+      if (!saved) {
+        setTheme(e.matches ? 'dark' : 'light')
+      }
+    }
+    
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
 
-  // Update document and localStorage when theme changes
   useEffect(() => {
     if (mounted) {
       localStorage.setItem('scholarchain-theme', theme)
       document.documentElement.setAttribute('data-theme', theme)
       document.documentElement.style.colorScheme = theme
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', theme === 'dark' ? '#0A0A0A' : '#FFFFFF')
+      }
     }
   }, [theme, mounted])
 
@@ -49,16 +64,22 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme(prev => prev === 'light' ? 'dark' : 'light')
   }
 
-  const currentTheme = theme === 'light' ? lightTheme : darkTheme
+  const currentTheme = (mounted ? theme : 'light') === 'light' ? lightTheme : darkTheme
+
+  if (!mounted) {
+    return (
+      <ThemeContext.Provider value={{ theme: 'light', toggleTheme, isDark: false }}>
+        <StyledThemeProvider theme={lightTheme}>
+          {children}
+        </StyledThemeProvider>
+      </ThemeContext.Provider>
+    )
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, isDark: theme === 'dark' }}>
       <StyledThemeProvider theme={currentTheme}>
-        {!mounted ? (
-          <div style={{ visibility: 'hidden' }}>{children}</div>
-        ) : (
-          children
-        )}
+        {children}
       </StyledThemeProvider>
     </ThemeContext.Provider>
   )
@@ -71,4 +92,3 @@ export const useTheme = () => {
   }
   return context
 }
-

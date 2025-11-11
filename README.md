@@ -1,188 +1,290 @@
-# 🎓 ScholarChain - Blockchain-Based Student Reward Platform
+# ScholarChain 🎓
 
-![ScholarChain](https://img.shields.io/badge/Platform-Stellar_Soroban-blue?style=for-the-badge&logo=stellar)
-![Version](https://img.shields.io/badge/Version-1.0.0-green?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-red?style=for-the-badge)
-
-> A decentralized application running on **Stellar Blockchain**, providing a transparent and secure reward system for the education sector.
+<div align="center">
+  <img src="stellar-fullstack/ScholarChain/frontend/public/stellar-logo.svg" alt="Stellar Logo" height="60" />
+  
+  ### Blockchain-based Student Reward Platform
+  
+  [![Powered by Stellar](https://img.shields.io/badge/Powered%20by-Stellar-000000?style=flat&logo=stellar)](https://stellar.org)
+  [![Built with Soroban](https://img.shields.io/badge/Built%20with-Soroban-7B42BC?style=flat)](https://soroban.stellar.org)
+  [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat&logo=next.js)](https://nextjs.org)
+  [![Rust](https://img.shields.io/badge/Rust-1.79+-orange?style=flat&logo=rust)](https://www.rust-lang.org)
+  
+  ---
+  
+  ### 📜 Deployed Contract
+  
+  **Contract ID (Testnet):**
+  ```
+  CCVCKTQGFE3F7TGJKDYE5DRITSGLQCL275ZSHMOIJNMRA7GKXWJPAMAN
+  ```
+  
+  **Network:** Stellar Testnet  
+  **Explorer:** [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CCVCKTQGFE3F7TGJKDYE5DRITSGLQCL275ZSHMOIJNMRA7GKXWJPAMAN)
+  
+</div>
 
 ## 📖 Project Description
 
-ScholarChain is a blockchain-based platform designed to boost student motivation and reward achievements transparently in educational institutions. Using Stellar Soroban smart contracts, it enables teachers to award token rewards to successful students and allows students to use these tokens for various purposes.
+ScholarChain revolutionizes academic rewards by leveraging Stellar blockchain technology. This platform enables teachers to mint token rewards for student achievements while students can view and spend their earned tokens. Built with Soroban smart contracts, it ensures transparent, tamper-proof record-keeping of all transactions. The system features separate dashboards for teachers and students, providing an intuitive interface for reward distribution and balance management. By decentralizing academic incentives, ScholarChain creates a trustless, efficient ecosystem where achievements are permanently recorded and instantly verifiable on the blockchain.
 
-The project addresses problems of lack of motivation and achievement tracking in education with the transparency, security, and immutability advantages that blockchain technology brings. All reward records are permanently stored on the Stellar blockchain and operate without the need for any central authority.
+## 🎯 Vision
 
-## 🔮 Vision
+ScholarChain envisions transforming education through blockchain technology, creating a global standard for academic recognition. By tokenizing achievements, we empower students worldwide with portable, verifiable credentials that transcend institutional boundaries. This platform democratizes educational rewards, making them accessible and transparent. As adoption grows, ScholarChain will enable students to build comprehensive achievement portfolios, recognized globally by educational institutions and employers. We're creating a future where every academic success is permanently recorded, fairly rewarded, and universally acknowledged, fostering motivation and excellence in education worldwide.
 
-ScholarChain aims to make the education system more fair, transparent, and motivating. Using the power of blockchain technology, it ensures that student achievements are recorded objectively and immutably.
+## 👨‍💻 About Me
 
-Our platform's vision is to enable all educational institutions to use blockchain-based systems for tracking and rewarding student achievements in the future. This way, students can see the true value of their accomplishments and stay motivated for continuous improvement. Additionally, through the tokenized reward system, students can convert their academic achievements into valuable resources they can use in real life.
+I'm passionate about merging blockchain technology with education to solve real-world problems. Through my journey in blockchain development, I've witnessed how decentralized systems can create transparency and trust. ScholarChain represents my vision of making education more rewarding and transparent. By building on Stellar's fast and low-cost infrastructure, I aim to demonstrate how blockchain can revolutionize traditional systems. This project combines my interest in both technology and education, creating meaningful impact for students and teachers alike.
 
-## ⚡ Features
+## 🛠️ Software Development Plan
 
-### 🎯 Core Features
-- **Token Reward System**: Rewarding student achievements with tokens
-- **Secure Wallet Integration**: Safe connection with Freighter Wallet
-- **Real-time Balance Tracking**: Instant token balance viewing
-- **Transparent Transactions**: All transactions recorded on blockchain
-- **Role-based Access**: Separate dashboards for teachers and students
+### Phase 1: Smart Contract Foundation
+- Define core data structures (balances, transactions, admin mappings)
+- Implement state management using Soroban storage patterns
+- Create admin authorization system with access control
 
-### 👨‍🏫 Teacher Panel
-- Award token rewards to students
-- Track total distributed tokens
-- Achievement categories (Attendance, Homework, Exam, Project)
-- View transaction history
+### Phase 2: Token Management Functions
+- Develop `initialize()` function for contract setup
+- Implement `mint()` function with admin-only restrictions
+- Create `spend()` function for token deduction
+- Add `get_balance()` and `get_total_distributed()` query functions
 
-### 👨‍🎓 Student Panel  
-- View token balance
-- Spend token transactions
-- Achievement badge system
-- General statistics
+### Phase 3: Security & Validation
+- Add input validation for all functions
+- Implement overflow protection for token amounts
+- Create comprehensive error handling system
+- Write unit tests for all contract functions
 
-## 🛠 Technology Stack
+### Phase 4: Frontend Development
+- Build Next.js application with TypeScript
+- Integrate Freighter wallet connectivity
+- Create teacher and student dashboard interfaces
+- Implement transaction signing and submission
 
-### Blockchain & Smart Contracts
-- **Stellar Soroban**: Smart contract development platform
-- **Rust**: Smart contract programming language
-- **Stellar SDK**: Blockchain integration
+### Phase 5: Testing & Optimization
+- Deploy contract to Stellar testnet
+- Perform end-to-end testing with real wallets
+- Optimize gas consumption and contract size
+- Conduct security audit
 
-### Frontend
-- **Next.js 15**: React framework
-- **TypeScript**: Type-safe development
-- **Styled Components**: CSS-in-JS styling
-- **Framer Motion**: Animations
-- **Freighter Wallet**: Stellar wallet integration
+### Phase 6: Deployment & Documentation
+- Deploy final version to Stellar mainnet
+- Create comprehensive user guides
+- Document API endpoints and contract methods
+- Set up monitoring and analytics
 
-### Development Tools
-- **Cargo**: Rust package manager
-- **ESLint**: Code quality control
-- **Tailwind CSS**: Utility-first CSS framework
+## ✨ Key Features
 
-## 🏗 Development Plan
+- 🔐 **Secure & Transparent**: All reward records are stored immutably on the Stellar blockchain
+- ⚡ **Fast Transactions**: Instant transaction confirmation with Soroban smart contracts
+- 👨‍🏫 **Teacher Dashboard**: Distribute token rewards to successful students
+- 👨‍🎓 **Student Dashboard**: View token balance and spend rewards
+- 🌐 **Decentralized**: No central authority controls the reward system
+- 💰 **Token-Based**: Native token system for student rewards
 
-### 1. Smart Contract Development
-- [x] **Token System**: Map<Address, u32> structure for student balance management
-- [x] **Mint Function**: Token reward distribution to students (`mint_reward`)
-- [x] **Balance Query**: Check student token balances (`get_balance`)
-- [x] **Token Spending**: Student token spending operations (`spend_tokens`)
-- [x] **Statistics Function**: Track total distributed tokens (`get_total_distributed`)
-- [x] **Security**: Address authentication and authorization controls
+## 🏗️ Architecture
 
-### 2. Frontend Development
-- [x] **Responsive UI**: Modern and user-friendly interface design
-- [x] **Wallet Integration**: Freighter Wallet connection and management
-- [x] **Dashboard Systems**: Separate panels for teachers and students
-- [x] **Real-time Data**: Instant updates of blockchain data
-- [x] **Error Handling**: Comprehensive error management and user notifications
+### Smart Contract (Rust + Soroban)
 
-### 3. Blockchain Integration
-- [x] **Stellar SDK Integration**: Contract calls and transaction management
-- [x] **Transaction Building**: Secure transaction creation and signing
-- [x] **Network Configuration**: Testnet and Mainnet configuration
+The ScholarChain smart contract is written in Rust and deployed on Stellar's Soroban platform.
 
-### 4. Testing and Validation
-- [x] **Smart Contract Tests**: Unit tests with Rust
-- [x] **Integration Testing**: Frontend-backend integration tests
-- [x] **User Experience Testing**: Usability tests
+**Key Functions:**
+- `initialize(admin)`: Initialize the contract with an admin address
+- `mint(student, amount, reason)`: Mint tokens to a student (admin only)
+- `spend(student, amount, category)`: Spend tokens from a student's balance
+- `get_balance(student)`: Get the token balance of a student
+- `get_total_distributed()`: Get the total tokens distributed
 
-### 5. Deployment and Production
-- [ ] **Smart Contract Deployment**: Stellar Testnet/Mainnet deployment
-- [ ] **Frontend Deployment**: Publishing via Vercel/Netlify
-- [ ] **Documentation**: Technical documentation and user guide
+### Frontend (Next.js 15 + TypeScript)
 
-## 📦 Installation and Setup
+Modern web application built with:
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **Styled Components** - CSS-in-JS styling
+- **Framer Motion** - Smooth animations
+- **Freighter Wallet** - Stellar wallet integration
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ and npm/yarn
-- Rust and Cargo
-- Stellar CLI tools
+
+- Node.js 18+ and npm
+- Rust 1.79+
+- Stellar CLI
 - Freighter Wallet browser extension
 
-### 1. Clone the Repository
+### Installation
+
+1. **Clone the repository**
 ```bash
-git clone https://github.com/your-username/stellar-fullstack.git
-cd stellar-fullstack
+git clone <repository-url>
+cd stellar-fullstack/ScholarChain
 ```
 
-### 2. Build the Smart Contract
+2. **Install Rust dependencies and build the contract**
 ```bash
-cd ScholarChain
-cargo build --target wasm32-unknown-unknown --release
+cargo build --release --target wasm32-unknown-unknown
 ```
 
-### 3. Deploy the Smart Contract
+3. **Install frontend dependencies**
 ```bash
-# Deploy with Stellar CLI
-stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/release/scholar_chain.wasm \
-  --network testnet \
-  --source your-secret-key
-```
-
-### 4. Frontend Setup
-```bash
-cd ScholarChain/frontend
+cd frontend
 npm install
 ```
 
-### 5. Environment Variables
-Create a `.env.local` file:
-```env
-NEXT_PUBLIC_CONTRACT_ID=your_contract_id_here
-NEXT_PUBLIC_STELLAR_RPC_URL=https://soroban-testnet.stellar.org
+4. **Set up environment variables**
+```bash
+# On Linux/Mac
+chmod +x setup-env.sh
+./setup-env.sh
+
+# On Windows (PowerShell)
+.\setup-env.ps1
 ```
 
-### 6. Start the Application
+Create a `.env.local` file in the `frontend` directory:
+```env
+NEXT_PUBLIC_CONTRACT_ID=your_contract_id_here
+NEXT_PUBLIC_NETWORK=testnet
+NEXT_PUBLIC_RPC_URL=https://soroban-testnet.stellar.org
+```
+
+5. **Run the development server**
 ```bash
 npm run dev
 ```
 
-The application will run at `http://localhost:3000`.
+Visit [http://localhost:3000](http://localhost:3000) to see the application.
 
-## 🎮 Usage
+## 📱 Usage
 
-### Teacher Operations
-1. Select "Teacher Login" from the home page
-2. Connect with Freighter Wallet
-3. Enter student address and specify token amount
-4. Click "Send Tokens" button
-5. Confirm the transaction in your wallet
+### For Teachers
 
-### Student Operations
-1. Select "Student Login" from the home page
-2. Connect with Freighter Wallet
+1. Connect your Freighter Wallet in **Testnet** mode
+2. Select "Teacher Login"
+3. Enter student wallet address
+4. Select reward category
+5. Enter amount and reason
+6. Click "Mint Tokens" to distribute rewards
+
+### For Students
+
+1. Connect your Freighter Wallet in **Testnet** mode
+2. Select "Student Login"
 3. View your token balance
-4. Make spending from "Spend Tokens" section
-5. Confirm the transaction in your wallet
+4. Select spending category
+5. Enter amount to spend
+6. Confirm transaction
+
+## 🔧 Smart Contract Deployment
+
+### Deploy to Stellar Testnet
+
+```bash
+# Build the contract
+cd contracts/scholar_chain
+make build
+
+# Deploy to testnet
+stellar contract deploy \
+  --wasm target/wasm32-unknown-unknown/release/scholar_chain.wasm \
+  --source <your-secret-key> \
+  --network testnet
+
+# Initialize the contract
+stellar contract invoke \
+  --id <contract-id> \
+  --source <admin-secret-key> \
+  --network testnet \
+  -- initialize \
+  --admin <admin-public-key>
+```
+
+## 🧪 Testing
+
+### Smart Contract Tests
+
+```bash
+cd contracts/scholar_chain
+cargo test
+```
+
+### Frontend Tests
+
+```bash
+cd frontend
+npm test
+```
+
+## 📂 Project Structure
+
+```
+GitHub/
+└── stellar-fullstack/
+    └── ScholarChain/
+        ├── contracts/
+        │   └── scholar_chain/          # Soroban smart contract
+        │       ├── src/
+        │       │   ├── lib.rs          # Main contract logic
+        │       │   └── test.rs         # Contract tests
+        │       ├── Cargo.toml
+        │       └── Makefile
+        ├── frontend/
+        │   ├── app/                    # Next.js app router
+        │   │   ├── page.tsx           # Home page
+        │   │   ├── student/           # Student dashboard
+        │   │   └── teacher/           # Teacher dashboard
+        │   ├── components/            # React components
+        │   ├── lib/                   # Utilities and helpers
+        │   ├── styles/                # Global styles and theme
+        │   ├── public/                # Static assets
+        │   │   ├── stellar-logo.svg   # Stellar logo (SVG)
+        │   │   └── stellar-logo2.avif # Stellar logo (AVIF)
+        │   └── package.json
+        ├── Cargo.toml
+        └── README.md
+```
+
+## 🛠️ Technologies
+
+<div align="center">
+
+| Category | Technology |
+|----------|-----------|
+| **Blockchain** | ![Stellar](https://img.shields.io/badge/-Stellar-000000?style=flat&logo=stellar) ![Soroban](https://img.shields.io/badge/-Soroban-7B42BC?style=flat) |
+| **Smart Contract** | ![Rust](https://img.shields.io/badge/-Rust-orange?style=flat&logo=rust) |
+| **Frontend** | ![Next.js](https://img.shields.io/badge/-Next.js-black?style=flat&logo=next.js) ![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat&logo=typescript&logoColor=white) |
+| **Styling** | ![Styled Components](https://img.shields.io/badge/-Styled%20Components-DB7093?style=flat&logo=styled-components&logoColor=white) |
+| **Animation** | ![Framer Motion](https://img.shields.io/badge/-Framer%20Motion-0055FF?style=flat&logo=framer) |
+| **Wallet** | ![Freighter](https://img.shields.io/badge/-Freighter%20Wallet-000000?style=flat) |
+
+</div>
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Create a Pull Request
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+## 📝 License
 
-## 👥 Team
-
-**Developer**: Taha Yunus Demir  
-**Platform**: Stellar Blockchain  
-**Framework**: Soroban Smart Contracts  
+This project is licensed under the MIT License.
 
 ## 🔗 Links
 
-- [Stellar Documentation](https://developers.stellar.org/)
-- [Soroban Smart Contracts](https://soroban.stellar.org/)
-- [Freighter Wallet](https://freighter.app/)
+- [Stellar Network](https://stellar.org)
+- [Soroban Documentation](https://soroban.stellar.org)
+- [Freighter Wallet](https://www.freighter.app/)
 - [Next.js Documentation](https://nextjs.org/docs)
 
 ---
 
 <div align="center">
-  <p>⚡ Powered by Stellar Soroban</p>
-  <p>🎓 The blockchain revolution in education begins!</p>
+  <p>Built with ❤️ using</p>
+  <img src="stellar-fullstack/ScholarChain/frontend/public/stellar-logo.svg" alt="Stellar" height="50" />
+  <p><strong>Stellar & Soroban</strong></p>
 </div>

@@ -1,6 +1,6 @@
 'use client'
 
-import { ThemeProvider } from '@/lib/ThemeProvider'
+import { ThemeProvider } from '@/styles/ThemeProvider'
 import GlobalStyles from '@/styles/GlobalStyles'
 import StyledComponentsRegistry from '@/lib/registry'
 

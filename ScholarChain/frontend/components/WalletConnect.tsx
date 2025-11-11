@@ -12,8 +12,8 @@ import { Button } from './Button'
 import { Card, CardText } from './Card'
 
 const ConnectedCard = styled(Card)`
-  background: ${({ theme }) => theme.colors.surface};
-  border: 2px solid ${({ theme }) => theme.colors.success};
+  background: ${({ theme }) => theme.colors.surface.toString()};
+  border: 2px solid ${({ theme }) => theme.colors.success.toString()};
 `;
 
 const ConnectedHeader = styled.div`
@@ -31,7 +31,7 @@ const ConnectedInfo = styled.div`
 
 const ConnectedLabel = styled.div`
   font-size: 0.875rem;
-  color: ${({ theme }) => theme.colors.success};
+  color: ${({ theme }) => theme.colors.success.toString()};
   font-weight: 600;
   margin-bottom: ${({ theme }) => theme.spacing.xs};
   display: flex;
@@ -42,29 +42,29 @@ const ConnectedLabel = styled.div`
 const ConnectedAddress = styled.div`
   font-family: ${({ theme }) => theme.fonts.mono};
   font-size: 0.875rem;
-  color: ${({ theme }) => theme.colors.foreground};
+  color: ${({ theme }) => theme.colors.foreground.toString()};
   word-break: break-all;
 `;
 
 const WarningCard = styled(Card)`
-  background: ${({ theme }) => theme.colors.gold}15;
-  border: 2px solid ${({ theme }) => theme.colors.gold};
+  background: ${({ theme }) => `${theme.colors.gold.toString()}15`};
+  border: 2px solid ${({ theme }) => theme.colors.gold.toString()};
   text-align: center;
 `;
 
 const WarningTitle = styled.div`
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.foreground};
+  color: ${({ theme }) => theme.colors.foreground.toString()};
   margin-bottom: ${({ theme }) => theme.spacing.sm};
   font-size: 1.125rem;
 `;
 
 const ErrorText = styled(motion.div)`
-  color: ${({ theme }) => theme.colors.error};
+  color: ${({ theme }) => theme.colors.error.toString()};
   font-size: 0.875rem;
   margin-top: ${({ theme }) => theme.spacing.md};
   padding: ${({ theme }) => theme.spacing.sm};
-  background-color: ${({ theme }) => theme.colors.error}15;
+  background-color: ${({ theme }) => `${theme.colors.error.toString()}15`};
   border-radius: ${({ theme }) => theme.border.radius.md};
   font-weight: 500;
 `;
@@ -141,10 +141,10 @@ export default function WalletConnect({
         setPublicKey(address);
         onConnect(address);
       } else {
-        setError('Cüzdan adresine erişilemedi');
+        setError('Unable to access wallet address');
       }
     } catch (err: any) {
-      setError(err?.message || 'Cüzdan bağlantısı başarısız oldu');
+      setError(err?.message || 'Wallet connection failed');
       console.error(err);
     } finally {
       setLoading(false);
@@ -161,15 +161,8 @@ export default function WalletConnect({
     return (
       <Card>
         <div style={{ textAlign: 'center', padding: '2rem' }}>
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-            style={{ display: 'inline-block', fontSize: '2rem' }}
-          >
-            ⚡
-          </motion.div>
-          <CardText style={{ marginTop: '1rem' }}>
-            Freighter kontrol ediliyor...
+          <CardText>
+            Checking Freighter...
           </CardText>
         </div>
       </Card>
@@ -179,10 +172,9 @@ export default function WalletConnect({
   if (!isFreighterInstalled) {
     return (
       <WarningCard>
-        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🦊</div>
-        <WarningTitle>Freighter Wallet Bulunamadı</WarningTitle>
+        <WarningTitle>Freighter Wallet Not Found</WarningTitle>
         <CardText style={{ marginBottom: '1.5rem' }}>
-          Devam etmek için Freighter Wallet eklentisini yüklemeniz gerekiyor.
+          You need to install Freighter Wallet extension to continue.
         </CardText>
         <Button
           as="a"
@@ -192,7 +184,7 @@ export default function WalletConnect({
           variant="primary"
           size="lg"
         >
-          Freighter Wallet Yükle
+          Install Freighter Wallet
         </Button>
       </WarningCard>
     );
@@ -208,7 +200,7 @@ export default function WalletConnect({
         <ConnectedHeader>
           <ConnectedInfo>
             <ConnectedLabel>
-              <span>✅</span> Cüzdan Bağlandı
+              <span>✅</span> Wallet Connected
             </ConnectedLabel>
             <ConnectedAddress>
               {publicKey.slice(0, 12)}...{publicKey.slice(-12)}
@@ -219,7 +211,7 @@ export default function WalletConnect({
             variant="outline"
             size="sm"
           >
-            Bağlantıyı Kes
+            Disconnect
           </Button>
         </ConnectedHeader>
       </ConnectedCard>
@@ -234,22 +226,7 @@ export default function WalletConnect({
         fullWidth
         size="lg"
       >
-        {loading ? (
-          <>
-            <motion.span
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-              style={{ display: 'inline-block' }}
-            >
-              ⚡
-            </motion.span>
-            Bağlanıyor...
-          </>
-        ) : (
-          <>
-            🦊 Freighter ile Bağlan
-          </>
-        )}
+        {loading ? 'Connecting...' : 'Connect with Freighter'}
       </Button>
       
       {error && (

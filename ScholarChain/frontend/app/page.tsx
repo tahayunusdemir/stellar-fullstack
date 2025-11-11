@@ -9,55 +9,50 @@ import { Card, CardTitle, CardText } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import WalletConnect from '@/components/WalletConnect';
+import { Grid, SectionSubtitle, GradientSectionTitle } from '@/components/ui';
 
 const Container = styled.div`
   min-height: 100vh;
   position: relative;
 `;
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: ${({ theme }) => theme.spacing.xl};
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing.xl};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    grid-template-columns: 1fr;
-    padding: 0 ${({ theme }) => theme.spacing.md};
-  }
-`;
-
 const RoleCard = styled(motion.div)<{ $selected?: boolean }>`
   background: ${({ theme, $selected }) => 
     $selected 
-      ? `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.gold})`
-      : theme.colors.background
+      ? `linear-gradient(135deg, ${theme.colors.primary.toString()}, ${theme.colors.gold.toString()})`
+      : theme.colors.surface.toString()
   };
   border: 2px solid ${({ theme, $selected }) => 
-    $selected ? theme.colors.primary : theme.colors.border
+    $selected ? 'transparent' : theme.colors.border.toString()
   };
   border-radius: ${({ theme }) => theme.border.radius.xl};
   padding: ${({ theme }) => theme.spacing['2xl']};
   cursor: pointer;
-  transition: all ${({ theme }) => theme.transition.normal};
+  transition: all 0.2s ease;
   text-align: center;
+  box-shadow: ${({ theme }) => theme.shadow.md};
   
   &:hover {
     transform: translateY(-8px);
     box-shadow: ${({ theme }) => theme.shadow.xl};
-    border-color: ${({ theme }) => theme.colors.primary};
+    border-color: ${({ theme, $selected }) => 
+      $selected ? 'transparent' : theme.colors.primary.toString()
+    };
+  }
+  
+  &:active {
+    transform: translateY(-4px);
   }
 `;
 
 const RoleIcon = styled.div<{ $selected?: boolean }>`
   font-size: 4rem;
   margin-bottom: ${({ theme }) => theme.spacing.lg};
-  transition: transform ${({ theme }) => theme.transition.normal};
+  transition: transform 0.2s ease;
+  filter: ${({ $selected }) => $selected ? 'drop-shadow(0 2px 8px rgba(255,255,255,0.3))' : 'none'};
   
   ${RoleCard}:hover & {
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(5deg);
   }
 `;
 
@@ -66,11 +61,14 @@ const RoleTitle = styled.h3<{ $selected?: boolean }>`
   font-size: 1.75rem;
   font-weight: 600;
   margin-bottom: ${({ theme }) => theme.spacing.sm};
-  color: ${({ $selected }) => $selected ? 'white' : 'inherit'};
+  color: ${({ theme, $selected }) => $selected ? 'white' : theme.colors.foreground.toString()};
+  letter-spacing: -0.01em;
 `;
 
 const RoleDescription = styled.p<{ $selected?: boolean }>`
-  color: ${({ theme, $selected }) => $selected ? 'rgba(255,255,255,0.9)' : theme.colors.secondary};
+  color: ${({ theme, $selected }) => 
+    $selected ? 'rgba(255,255,255,0.95)' : theme.colors.secondary.toString()
+  };
   font-size: 1rem;
   line-height: 1.6;
 `;
@@ -91,7 +89,8 @@ const BackButton = styled(Button)`
 
 const FeatureSection = styled.section`
   padding: ${({ theme }) => theme.spacing['3xl']} 0;
-  background-color: ${({ theme }) => theme.colors.surface};
+  background-color: ${({ theme }) => theme.colors.surface.toString()};
+  border-top: 1px solid ${({ theme }) => theme.colors.border.toString()};
 `;
 
 const FeatureGrid = styled(Grid)`
@@ -109,28 +108,47 @@ const FeatureIcon = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
-const SectionTitle = styled.h2`
-  font-family: ${({ theme }) => theme.fonts.heading};
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 600;
+const Footer = styled.footer`
+  background-color: ${({ theme }) => theme.colors.surface.toString()};
+  border-top: 1px solid ${({ theme }) => theme.colors.border.toString()};
+  padding: ${({ theme }) => theme.spacing['2xl']} 0;
   text-align: center;
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
-  background: linear-gradient(
-    135deg,
-    ${({ theme }) => theme.colors.foreground},
-    ${({ theme }) => theme.colors.primary}
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 `;
 
-const SectionSubtitle = styled.p`
-  text-align: center;
-  color: ${({ theme }) => theme.colors.secondary};
-  font-size: 1.125rem;
-  max-width: 600px;
-  margin: 0 auto ${({ theme }) => theme.spacing['2xl']};
+const FooterContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 ${({ theme }) => theme.spacing.xl};
+`;
+
+const FooterText = styled.p`
+  color: ${({ theme }) => theme.colors.secondary.toString()};
+  font-size: 0.875rem;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+`;
+
+const PoweredBy = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${({ theme }) => theme.spacing.md};
+  margin-top: ${({ theme }) => theme.spacing.lg};
+`;
+
+const StellarLogo = styled.img`
+  height: 32px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+  
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const PoweredByText = styled.span`
+  color: ${({ theme }) => theme.colors.secondary.toString()};
+  font-size: 0.875rem;
+  font-weight: 500;
 `;
 
 export default function Home() {
@@ -177,7 +195,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              🎓 ScholarChain
+              ScholarChain
             </Hero.Title>
             
             <Hero.Subtitle
@@ -185,8 +203,8 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Blockchain tabanlı öğrenci ödül platformu. Akademik başarıları 
-              şeffaf ve değiştirilemez bir şekilde kaydedin.
+              Blockchain-based student reward platform. Record academic achievements 
+              transparently and immutably.
             </Hero.Subtitle>
 
             <Grid>
@@ -199,9 +217,9 @@ export default function Home() {
                 whileTap={{ scale: 0.98 }}
               >
                 <RoleIcon>👨‍🎓</RoleIcon>
-                <RoleTitle>Öğrenci Girişi</RoleTitle>
+                <RoleTitle>Student Login</RoleTitle>
                 <RoleDescription>
-                  Token bakiyenizi görüntüleyin ve ödüllerinizi harcayın
+                  View your token balance and spend your rewards
                 </RoleDescription>
               </RoleCard>
 
@@ -214,42 +232,39 @@ export default function Home() {
                 whileTap={{ scale: 0.98 }}
               >
                 <RoleIcon>👨‍🏫</RoleIcon>
-                <RoleTitle>Öğretmen Girişi</RoleTitle>
+                <RoleTitle>Teacher Login</RoleTitle>
                 <RoleDescription>
-                  Başarılı öğrencilere token ödülleri dağıtın
+                  Distribute token rewards to successful students
                 </RoleDescription>
               </RoleCard>
             </Grid>
           </Hero>
 
           <FeatureSection>
-            <SectionTitle>Neden ScholarChain?</SectionTitle>
+            <GradientSectionTitle>Why ScholarChain?</GradientSectionTitle>
             <SectionSubtitle>
-              Blockchain teknolojisi ile eğitimde şeffaflık ve motivasyon
+              Transparency and motivation in education through blockchain technology
             </SectionSubtitle>
             
             <FeatureGrid>
               <FeatureCard>
-                <FeatureIcon>🔐</FeatureIcon>
-                <CardTitle>Güvenli</CardTitle>
+                <CardTitle>Secure</CardTitle>
                 <CardText>
-                  Stellar blockchain üzerinde güvenli ve şeffaf kayıtlar
+                  Secure and transparent records on Stellar blockchain
                 </CardText>
               </FeatureCard>
 
               <FeatureCard>
-                <FeatureIcon>⚡</FeatureIcon>
-                <CardTitle>Hızlı</CardTitle>
+                <CardTitle>Fast</CardTitle>
                 <CardText>
-                  Soroban smart contract'ları ile anında işlem onayı
+                  Instant transaction confirmation with Soroban smart contracts
                 </CardText>
               </FeatureCard>
 
               <FeatureCard>
-                <FeatureIcon>🎯</FeatureIcon>
-                <CardTitle>Şeffaf</CardTitle>
+                <CardTitle>Transparent</CardTitle>
                 <CardText>
-                  Tüm ödül kayıtları blockchain'de değiştirilemez şekilde saklanır
+                  All reward records stored immutably on the blockchain
                 </CardText>
               </FeatureCard>
             </FeatureGrid>
@@ -264,7 +279,7 @@ export default function Home() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
           >
-            ← Geri
+            ← Back
           </BackButton>
 
           <motion.div
@@ -277,11 +292,11 @@ export default function Home() {
             </div>
             
             <Hero.Title>
-              {selectedRole === 'student' ? 'Öğrenci' : 'Öğretmen'} Girişi
+              {selectedRole === 'student' ? 'Student' : 'Teacher'} Login
             </Hero.Title>
             
             <Hero.Subtitle>
-              Devam etmek için Freighter Wallet ile bağlanın
+              Connect with Freighter Wallet to continue
             </Hero.Subtitle>
           </motion.div>
 
@@ -297,13 +312,29 @@ export default function Home() {
             
             <Card style={{ marginTop: '2rem', textAlign: 'left' }}>
               <CardText style={{ fontSize: '0.875rem' }}>
-                <strong>ℹ️ Not:</strong> Freighter Wallet&apos;ı <strong>Testnet</strong> modunda 
-                kullanmayı unutmayın.
+                <strong>Note:</strong> Remember to use Freighter Wallet in <strong>Testnet</strong> mode.
               </CardText>
             </Card>
           </WalletSection>
         </Hero>
       )}
+      
+      <Footer>
+        <FooterContent>
+          <FooterText>
+            © 2025 ScholarChain. Blockchain-based student reward platform.
+          </FooterText>
+          <PoweredBy>
+            <PoweredByText>Powered by</PoweredByText>
+            <a href="https://stellar.org" target="_blank" rel="noopener noreferrer">
+              <StellarLogo 
+                src="/stellar-logo.svg" 
+                alt="Stellar" 
+              />
+            </a>
+          </PoweredBy>
+        </FooterContent>
+      </Footer>
     </Container>
   );
 }

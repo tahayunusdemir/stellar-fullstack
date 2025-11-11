@@ -10,7 +10,6 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
   }
 
-  /* Font smoothing - Stellar style */
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -18,7 +17,6 @@ const GlobalStyles = createGlobalStyle`
     scroll-behavior: smooth;
   }
 
-  /* Dynamic viewport height - Stellar pattern */
   html, body {
     height: 100%;
     height: 100dvh;
@@ -27,14 +25,19 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: ${({ theme }) => theme.fonts.body}, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.foreground};
-    transition: background-color ${({ theme }) => theme.transition.normal}, 
-                color ${({ theme }) => theme.transition.normal};
+    background-color: ${({ theme }) => theme.colors.background.toString()};
+    color: ${({ theme }) => theme.colors.foreground.toString()};
+    transition: background-color 0.2s ease, color 0.2s ease;
     line-height: 1.6;
   }
-
-  /* Typography - Stellar inspired */
+  
+  div, section, article, aside, header, footer, nav, main {
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  
+  h1, h2, h3, h4, h5, h6, p, span, a, label {
+    transition: color 0.2s ease;
+  }
   h1, h2, h3, h4, h5, h6 {
     font-family: ${({ theme }) => theme.fonts.heading}, serif;
     font-weight: 600;
@@ -68,7 +71,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   pre {
-    background-color: ${({ theme }) => theme.colors.surface};
+    background-color: ${({ theme }) => theme.colors.surface.toString()};
     padding: ${({ theme }) => theme.spacing.md};
     border-radius: ${({ theme }) => theme.border.radius.md};
     overflow-x: auto;
@@ -81,7 +84,7 @@ const GlobalStyles = createGlobalStyle`
     transition: color ${({ theme }) => theme.transition.fast};
     
     &:hover {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.primary.toString()};
     }
   }
 
@@ -120,13 +123,13 @@ const GlobalStyles = createGlobalStyle`
 
   /* Focus visible - accessibility */
   *:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline: 2px solid ${({ theme }) => theme.colors.primary.toString()};
     outline-offset: 2px;
   }
 
   /* Selection */
   ::selection {
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.primary.toString()};
     color: white;
   }
 
@@ -137,21 +140,20 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.colors.surface};
+    background: ${({ theme }) => theme.colors.surface.toString()};
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.colors.border};
+    background: ${({ theme }) => theme.colors.border.toString()};
     border-radius: 4px;
     
     &:hover {
-      background: ${({ theme }) => theme.colors.secondary};
+      background: ${({ theme }) => theme.colors.secondary.toString()};
     }
   }
 
-  /* Utilities */
   .container {
-    max-width: 1440px;
+    max-width: ${({ theme }) => theme.grid.maxWidth};
     margin: 0 auto;
     padding: 0 ${({ theme }) => theme.spacing.md};
     
@@ -164,6 +166,15 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(${({ theme }) => theme.grid.columns}, 1fr);
+    gap: ${({ theme }) => theme.grid.gap};
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      grid-template-columns: 1fr;
+    }
+  }
   .sr-only {
     position: absolute;
     width: 1px;
@@ -175,7 +186,60 @@ const GlobalStyles = createGlobalStyle`
     white-space: nowrap;
     border-width: 0;
   }
+
+  .skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: ${({ theme }) => theme.colors.primary.toString()};
+    color: white;
+    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+    text-decoration: none;
+    z-index: 1000;
+    border-radius: ${({ theme }) => theme.border.radius.md};
+    font-weight: 600;
+    transition: top ${({ theme }) => theme.transition.fast};
+    
+    &:focus {
+      top: ${({ theme }) => theme.spacing.sm};
+    }
+  }
+
+  body.modal-open {
+    overflow: hidden;
+    padding-right: var(--scrollbar-width, 0);
+  }
+
+  .will-change {
+    will-change: transform, opacity;
+  }
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .truncate {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 `
 
 export default GlobalStyles
-

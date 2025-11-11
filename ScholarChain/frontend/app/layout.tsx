@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Lora } from 'next/font/google';
 import { Providers } from '@/components/Providers';
-import "./globals.css";
 
-// Stellar-inspired font configuration
 const inter = Inter({ 
   subsets: ['latin'], 
   variable: '--font-inter',
@@ -20,8 +18,8 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "ScholarChain - Blockchain Tabanlı Öğrenci Ödül Platformu",
-  description: "Öğrencilerin akademik başarılarını blockchain ile ödüllendiren yenilikçi eğitim platformu. Stellar Soroban ile güçlendirilmiştir.",
+  title: "ScholarChain - Blockchain-Based Student Reward Platform",
+  description: "Innovative educational platform that rewards students' academic achievements with blockchain. Powered by Stellar Soroban.",
 };
 
 export default function RootLayout({
@@ -30,9 +28,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" className={`${inter.variable} ${lora.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${lora.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/svg+xml" href="/scholar-icon.svg" />
+        <meta name="theme-color" content="#FFFFFF" />
       </head>
       <body className={`${inter.className} antialiased`} suppressHydrationWarning>
         <Providers>
